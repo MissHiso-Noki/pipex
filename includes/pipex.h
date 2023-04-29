@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 19:16:02 by ccoste            #+#    #+#             */
-/*   Updated: 2023/04/26 23:42:09 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/04/29 13:28:26 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@
 # define ERR_INPUT "Invalid number of arguments.\n"
 # define ERR_PIPE "Pipe"
 # define ERR_CMD "Command not found\n"
+
+typedef struct s_pipex
+{
+	pid_t	pid1;
+	pid_t	pid2;
+	int		tube[2];
+	int		infile;
+	int		outfile;
+	char	*paths;
+	char	**cmd_paths;
+	char	**cmd_args;
+	char	*cmd;
+}t_pipex;
 
 //ft_split.c
 static char	    **free_tab(char **tab);
