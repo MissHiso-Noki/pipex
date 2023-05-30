@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 19:16:02 by ccoste            #+#    #+#             */
-/*   Updated: 2023/04/29 13:28:26 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/05/29 14:28:27 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define ERR_INFILE "Infile"
 # define ERR_OUTFILE "Outfile"
 # define ERR_INPUT "Invalid number of arguments.\n"
-# define ERR_PIPE "Pipe"
+# define ERR_PIPE "Pipe" 
 # define ERR_CMD "Command not found\n"
 
 typedef struct s_pipex
@@ -52,10 +52,18 @@ typedef struct s_pipex
 	char	*cmd;
 }t_pipex;
 
+//ft_bzero.c
+
+void			ft_bzero(void *s, size_t n);
+
+//ft_calloc.c
+
+void			*ft_calloc(size_t nmemb, size_t size);
+
 //ft_split.c
-static char	    **free_tab(char **tab);
-static size_t	count_words(const char *s, char c);
-static void	    get_word(char **next, size_t *len, char c);
+char			**free_tab(char **tab);
+size_t			count_words(const char *s, char c);
+void 			get_word(char **next, size_t *len, char c);
 char	        **ft_split(const char *s, char c);
 
 //ft_strdup.c
@@ -63,6 +71,9 @@ char	        *ft_strdup(const char *s);
 
 //ft_strjoin.c
 char	        *ft_strjoin(char const *s1, char const *s2);
+
+//ft_strlcpy
+size_t			ft_strlcpy(char *dst, const char *src, size_t size);
 
 //ft_strncmp.c
 int	            ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -73,5 +84,18 @@ size_t	        ft_strlen(const char *s);
 //error.c
 int	            msg(char *err);
 void	        msg_error(char *err);
+
+//free.c
+void            child_free(t_pipex *pipex);
+void            parent_free(t_pipex *pipex);
+
+//childs.c
+char			*get_cmd(char **paths, char *cmd);
+void			first_child(t_pipex pipex, char *argv[], char *envp[]);
+void			second_child(t_pipex pipex, char *argv[], char *envp[]);
+
+//pipex.c
+char			*find_path(char **envp);
+void			close_pipes(t_pipex *pipex);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 21:01:49 by ccoste            #+#    #+#             */
-/*   Updated: 2023/04/26 21:02:09 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/05/29 14:07:54 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-static char	**free_tab(char **tab)
+char	**free_tab(char **tab)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ static char	**free_tab(char **tab)
 	return (NULL);
 }
 
-static size_t	count_words(const char *s, char c)
+size_t	count_words(const char *s, char c)
 {
 	int	i;
 	int	nbr;
@@ -53,7 +53,7 @@ static size_t	count_words(const char *s, char c)
 	return (nbr);
 }
 
-static void	get_word(char **next, size_t *len, char c)
+void	get_word(char **next, size_t *len, char c)
 {
 	size_t	i;
 

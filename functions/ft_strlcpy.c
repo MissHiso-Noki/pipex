@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 14:41:31 by ccoste            #+#    #+#             */
-/*   Updated: 2023/05/29 14:44:18 by ccoste           ###   ########.fr       */
+/*   Created: 2023/05/29 14:10:33 by ccoste            #+#    #+#             */
+/*   Updated: 2023/05/29 14:10:37 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	parent_free(t_pipex *pipex)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+
 {
-	int	i;
+	unsigned int	i;
+	unsigned int	j;
 
 	i = 0;
-	close(pipex->infile);
-	close(pipex->outfile);
-	while (pipex->cmd_paths[i])
+	j = 0;
+	i = ft_strlen(src);
+	if (size != 0)
 	{
-		free(pipex->cmd_paths[i]);
-		i++;
+		while (src[j] != '\0' && j < (size - 1))
+		{
+			dst[j] = src[j];
+			j++;
+		}
+		dst[j] = '\0';
 	}
-	free(pipex->cmd_paths);
-}
-
-void	child_free(t_pipex *pipex)
-{
-	int	i;
-
-	i = 0;
-	while (pipex->cmd_args[i])
-	{
-		free(pipex->cmd_args[i]);
-		i++;
-	}
-	free(pipex->cmd_args);
-	free(pipex->cmd);
+	return (i);
 }

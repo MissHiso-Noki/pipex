@@ -1,42 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 14:41:31 by ccoste            #+#    #+#             */
-/*   Updated: 2023/05/29 14:44:18 by ccoste           ###   ########.fr       */
+/*   Created: 2023/05/29 14:11:03 by ccoste            #+#    #+#             */
+/*   Updated: 2023/05/29 14:11:52 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	parent_free(t_pipex *pipex)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
-	close(pipex->infile);
-	close(pipex->outfile);
-	while (pipex->cmd_paths[i])
+	if (!s)
 	{
-		free(pipex->cmd_paths[i]);
+		return ;
+	}
+	while (i < n)
+	{
+		*(char *)(s + i) = 0;
 		i++;
 	}
-	free(pipex->cmd_paths);
-}
-
-void	child_free(t_pipex *pipex)
-{
-	int	i;
-
-	i = 0;
-	while (pipex->cmd_args[i])
-	{
-		free(pipex->cmd_args[i]);
-		i++;
-	}
-	free(pipex->cmd_args);
-	free(pipex->cmd);
 }

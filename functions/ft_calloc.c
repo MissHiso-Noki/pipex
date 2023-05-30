@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 14:41:31 by ccoste            #+#    #+#             */
-/*   Updated: 2023/05/29 14:44:18 by ccoste           ###   ########.fr       */
+/*   Created: 2023/05/29 13:58:46 by ccoste            #+#    #+#             */
+/*   Updated: 2023/05/29 13:59:59 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	parent_free(t_pipex *pipex)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int	i;
+	unsigned char	*str;
 
-	i = 0;
-	close(pipex->infile);
-	close(pipex->outfile);
-	while (pipex->cmd_paths[i])
+	if (size != 0 && (size * nmemb) / size == !nmemb)
 	{
-		free(pipex->cmd_paths[i]);
-		i++;
+		return (NULL);
 	}
-	free(pipex->cmd_paths);
-}
-
-void	child_free(t_pipex *pipex)
-{
-	int	i;
-
-	i = 0;
-	while (pipex->cmd_args[i])
+	str = malloc(nmemb * size);
+	if (!nmemb || !size)
 	{
-		free(pipex->cmd_args[i]);
-		i++;
+		return (str);
 	}
-	free(pipex->cmd_args);
-	free(pipex->cmd);
+	if (!str)
+	{
+		return (NULL);
+	}
+	ft_bzero(str, nmemb * size);
+	return (str);
 }
