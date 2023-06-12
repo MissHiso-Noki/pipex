@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 14:41:23 by ccoste            #+#    #+#             */
-/*   Updated: 2023/05/29 14:44:15 by ccoste           ###   ########.fr       */
+/*   Created: 2023/05/30 20:12:12 by ccoste            #+#    #+#             */
+/*   Updated: 2023/05/31 17:17:10 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	msg(char *err)
+int     msg(char *error)
 {
-	write(2, err, ft_strlen(err));
-	return (1);
+    write(1, error, ft_strlen(error));
+    return (1);
 }
 
-void	msg_error(char *err)
+void    msg_perror(char *error)
 {
-	perror(err);
-	exit (1);
+    perror(error);
+    exit(EXIT_FAILURE);
 }

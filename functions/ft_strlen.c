@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/26 23:37:54 by ccoste            #+#    #+#             */
-/*   Updated: 2023/05/30 11:22:27 by ccoste           ###   ########.fr       */
+/*   Created: 2023/05/30 20:31:48 by ccoste            #+#    #+#             */
+/*   Updated: 2023/05/30 20:41:59 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,15 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
+
+//int main () {
+//   char str[50];
+//   int len;
+
+//   strcpy(str, "This is tutorialspoint.com");
+
+//   len = strlen(str);
+//   printf("Length of |%s| is |%d|\n", str, len);
+
+//   return(0);
+//}

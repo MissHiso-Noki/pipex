@@ -5,101 +5,100 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/26 21:01:49 by ccoste            #+#    #+#             */
-/*   Updated: 2023/05/29 14:07:54 by ccoste           ###   ########.fr       */
+/*   Created: 2023/05/31 17:14:20 by ccoste            #+#    #+#             */
+/*   Updated: 2023/06/10 17:34:40 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-char	**free_tab(char **tab)
+size_t	words_count(char *s, char c)
 {
-	int	i;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	while (tab[i])
+	j = 0;
+	while (*s)
 	{
-		free(tab[i]);
+		if (*s != c)
+			i++;
+		else if (*s == c && i != 0)
+		{
+			j++;
+			i = 0;
+		}
+		s++;
+	}
+	if (i != 0)
+		j++;
+	return (j);
+}
+
+char	*word(char *s, char c)
+{
+	char	*buf;
+
+	while (*s == c)
+		s++;
+	buf = s;
+	while (*buf && *buf != c)
+		buf++;
+	*buf = '\0';
+	return (ft_strdup(s));
+}
+
+char	**free_arr(char **arr, char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
 		i++;
 	}
-	free(tab);
+	free(arr);
+	free(s);
 	return (NULL);
 }
 
-size_t	count_words(const char *s, char c)
-{
-	int	i;
-	int	nbr;
-
-	i = 0;
-	nbr = 0;
-	if (!s[0])
-		return (0);
-	while (s[i] && s[i] == c)
-		i++;
-	while (s[i] != '\0')
-	{
-		if (s[i] == c)
-		{
-			nbr++;
-			while (s[i] && s[i] == c)
-				i++;
-			continue ;
-		}
-		i++;
-	}
-	if (s[i - 1] != c)
-		nbr++;
-	return (nbr);
-}
-
-void	get_word(char **next, size_t *len, char c)
+char	**worker(char **arr, char *s1, char c, size_t j)
 {
 	size_t	i;
+	char	*str;
 
-	*next = *next + *len;
-	*len = 0;
+	str = s1;
 	i = 0;
-	while (**next && **next == c)
+	while (i < j)
 	{
-		(*next)++;
-	}
-	while ((*next)[i] != '\0')
-	{
-		if ((*next)[i] == c)
+		if (*s1 != c)
 		{
-			return ;
+			arr[i] = word(s1, c);
+			if (!arr[i])
+				return (free_arr(arr, s1));
+			s1 = s1 + ft_strlen(arr[i]);
+			i++;
 		}
-		(*len)++;
-		i++;
+		s1++;
 	}
+	arr[i] = NULL;
+	free(str);
+	return (arr);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	char	**tab;
-	char	*next;
-	size_t	len;
-	size_t	i;
+	char	**w_arr;
+	char	*s1;
+	size_t	j;
 
-	i = 0;
-	len = 0;
-	next = (char *)s;
-	if (!s)
+	s1 = ft_strdup(s);
+	if (!s1)
 		return (NULL);
-	tab = ft_calloc((count_words(s, c) + 1), sizeof(char *));
-	if (!tab)
+	j = words_count(s1, c);
+	w_arr = (char **)malloc(sizeof(char *) * (j + 1));
+	if (!w_arr)
 		return (NULL);
-	while (i < count_words(s, c))
-	{
-		get_word(&next, &len, c);
-		tab[i] = ft_calloc((len + 1), sizeof(char));
-		if (!tab[i])
-		{
-			return (free_tab(tab));
-		}
-		ft_strlcpy(tab[i], next, len +1);
-		i++;
-	}
-	return (tab);
+	return (worker(w_arr, s1, c, j));
 }

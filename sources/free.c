@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/29 14:41:31 by ccoste            #+#    #+#             */
-/*   Updated: 2023/05/30 13:04:53 by ccoste           ###   ########.fr       */
+/*   Created: 2023/05/31 13:12:59 by ccoste            #+#    #+#             */
+/*   Updated: 2023/06/10 17:37:22 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	parent_free(t_pipex *pipex)
+void    parent_free(t_pipe *pipex)
 {
-	int	i;
+    int	i;
 
 	i = 0;
 	close(pipex->infile);
@@ -27,9 +27,9 @@ void	parent_free(t_pipex *pipex)
 	free(pipex->cmd_paths);
 }
 
-void	child_free(t_pipex *pipex)
+void    child_free(t_pipe *pipex)
 {
-	int	i;
+    int	i;
 
 	i = 0;
 	while (pipex->cmd_args[i])

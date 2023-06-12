@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/20 19:19:20 by ccoste            #+#    #+#              #
-#    Updated: 2023/05/29 14:37:55 by ccoste           ###   ########.fr        #
+#    Created: 2023/05/30 18:21:17 by ccoste            #+#    #+#              #
+#    Updated: 2023/06/10 17:35:08 by ccoste           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,12 @@ HEADER_SRCS	=	pipex.h
 HEADER_DIR	=	includes/
 HEADER		=	$(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
-MPATH_SRCS	=	pipex.c childs.c error.c free.c
+MPATH_SRCS	=	pipex.c error.c childs.c free.c
 MPATH_DIR	=	sources/
 MPATH		=	$(addprefix $(MPATH_DIR), $(MPATH_SRCS))
 OBJ_M		=	$(MPATH:.c=.o)
 
-FUNC_SRCS	=	ft_strncmp.c ft_strdup.c ft_split.c ft_strjoin.c ft_bzero.c ft_calloc.c ft_strlcpy.c ft_strlen.c
+FUNC_SRCS	=	ft_split.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strncmp.c
 FUNC_DIR	=	functions/
 FUNC 		=	$(addprefix $(FUNC_DIR), $(FUNC_SRCS))
 OBJ_F		=	$(FUNC:.c=.o)
