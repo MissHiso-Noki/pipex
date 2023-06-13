@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:21:14 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/13 17:43:48 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/13 17:54:48 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,15 @@
 
 typedef struct s_pipe
 {
-//pid_t utilisé pour stocker des valeurs entières représentant les identifiants de processus.
-//pid = identifiant d'un processus
-	pid_t pid1;
-	pid_t pid2;
-	char *path;
-	char **cmd_paths;
-	char **cmd_args;
-	char *cmd;
-	int infile;
-	int outfile;
-	int pipe[2];
+	pid_t	pid1;
+	pid_t	pid2;
+	char	*path;
+	char	**cmd_paths;
+	char	**cmd_args;
+	char	*cmd;
+	int		infile;
+	int		outfile;
+	int		pipe[2];
 }				t_pipe;
 
 /* FUNCTIONS */
