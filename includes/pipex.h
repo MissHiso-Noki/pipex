@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:21:14 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/10 17:42:39 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/12 16:38:02 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 
 //open, close, read, write, unlink
 # include <fcntl.h>
+
+//waitpid
+#include <sys/types.h>
+#include <sys/wait.h>
 
 # define ERR_INPUT "Invalid number of arguments.\n"
 # define ERR_INFILE "Infile.\n"

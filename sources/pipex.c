@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:36:48 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/10 17:42:35 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/13 11:35:24 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main(int argc, char *argv[], char *envp[])
     }
 //O_RDONLY : Ouvrir le fichier en lecture seule.
     pipex.infile = open(argv[1], O_RDONLY);
-    if (argv[1] < 0)
+    if (argv[1] == NULL)
     {
         msg_perror(ERR_INFILE);
     }
@@ -53,7 +53,7 @@ int main(int argc, char *argv[], char *envp[])
 //O_RDWR : Cette option est utilisée pour ouvrir le fichier en lecture et en écriture.
 //0644 : Spécifie que le propriétaire du fichier a les permissions de lecture et d'écriture, tandis que les autres utilisateurs ont uniquement la permission de lecture.
     pipex.outfile = open(argv[argc - 1], O_CREAT | O_TRUNC | O_RDWR, 0644);
-    if (argv[argc - 1] < 0)
+    if (argv[argc - 1] == NULL)
     {
         msg_perror(ERR_OUTFILE);
     }
@@ -62,7 +62,7 @@ int main(int argc, char *argv[], char *envp[])
         msg_perror(ERR_PIPE);
     }
     pipex.path = find_path(envp);
-    pipex.cmd_paths = ft_split(pipex.path, ":");
+    pipex.cmd_paths = ft_split(pipex.path, ':');
 //fork retourne une valeur négative, cela signifie qu'une erreur s'est produite lors de la création du processus enfant.
 //fork retourne 0, cela signifie que vous êtes dans le processus enfant.
 //fork retourne une valeur positive, cela signifie que vous êtes dans le processus parent et la valeur retournée est l'identifiant du processus enfant.
@@ -77,7 +77,7 @@ int main(int argc, char *argv[], char *envp[])
         second_child(pipex, argv, envp);
     }
     close_pipes(&pipex);
-    waitpid(pipex.pid1, NULL, 0);
+	waitpid(pipex.pid1, NULL, 0);
 	waitpid(pipex.pid2, NULL, 0);
 	parent_free(&pipex);
     return(0);
