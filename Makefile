@@ -6,14 +6,14 @@
 #    By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/30 18:21:17 by ccoste            #+#    #+#              #
-#    Updated: 2023/06/10 17:35:08 by ccoste           ###   ########.fr        #
+#    Updated: 2023/06/15 14:59:28 by ccoste           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #SETUP
 NAME		=	pipex
 CC			=	gcc
-FLAGS		=	-Wall -Wextra -Werror
+FLAGS		=	-Wall -Wextra -Werror -g3
 RM			=	rm -rf
 
 #FILES AND PATH

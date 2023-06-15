@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:36:48 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/13 17:51:54 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/15 15:51:35 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,22 @@ void	close_pipes(t_pipe *pipex)
 	close(pipex->pipe[1]);
 }
 
-int	main(int argc, char *argv[], char *envp[])
+void	error_in(int argc)
 {
-	t_pipe	pipex;
-
 	if (argc != 5)
 	{
 		msg(ERR_INPUT);
 		exit(EXIT_FAILURE);
 	}
+}
+
+int	main(int argc, char *argv[], char *envp[])
+{
+	t_pipe	pipex;
+
+
+	error_in(argc);
+	printf("%d\n", argc);
 	pipex.infile = open(argv[1], O_RDONLY);
 	if (argv[1] == NULL)
 		msg_perror(ERR_INFILE);

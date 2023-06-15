@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:14:28 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/13 17:36:38 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/15 16:56:38 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	dest[sizes1 + j] = '\0';
 	return (dest);
 }
+

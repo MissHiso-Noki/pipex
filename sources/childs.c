@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 13:12:55 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/13 17:49:02 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/15 14:35:57 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	first_child(t_pipe pipex, char *argv[], char *envp[])
 	{
 		child_free(&pipex);
 		msg(ERR_CMD);
-		exit(EXIT_FAILURE);
 	}
 	execve(pipex.cmd, pipex.cmd_args, envp);
 }
@@ -57,7 +56,6 @@ void	second_child(t_pipe pipex, char *argv[], char *envp[])
 	{
 		child_free(&pipex);
 		msg(ERR_CMD);
-		exit(EXIT_FAILURE);
 	}
 	execve(pipex.cmd, pipex.cmd_args, envp);
 }

@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:21:14 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/13 17:54:48 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/15 12:38:07 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 //pipex.c
 void		close_pipes(t_pipe *pipex);
 char		*find_path(char **envp);
+void		error_in(int argc);
 
 //error.c
 int			msg(char *error);
