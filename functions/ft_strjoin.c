@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:14:28 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/16 11:29:23 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/20 13:44:41 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,28 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		sizes1;
-	int		sizes2;
-	char	*dest;
-	int		i;
-	int		j;
+	char	*str;
+	size_t	i;
+	size_t	j;
 
-	if(!s1 || !s2)
-		return(NULL);
-	sizes1 = ft_strlen(s1);
-	sizes2 = ft_strlen(s2);
-	i = 0;
-	j = 0;
-
-	dest = malloc((sizes1 + sizes2 + 1) * sizeof(char));
-	if (!dest)
+	if (!s1 || !s2)
 		return (NULL);
-	while (s1[i] != '\0')
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s1[i])
 	{
-		dest[i] = s1[i];
+		str[i] = s1[i];
 		i++;
 	}
-	while (s2[j] != '\0')
+	j = 0;
+	while (s2[j])
 	{
-		dest[sizes1 + j] = s2[j];
+		str[i] = s2[j];
+		i++;
 		j++;
 	}
-	dest[sizes1 + j] = '\0';
-	return (dest);
+	str[i] = '\0';
+	return (str);
 }
-
