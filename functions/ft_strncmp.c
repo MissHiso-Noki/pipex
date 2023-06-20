@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 16:47:26 by ccoste            #+#    #+#             */
-/*   Updated: 2023/05/31 17:17:04 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/20 12:15:16 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	unsigned char	*str1;
 	unsigned char	*str2;
 
+	if (n == 0)
+		return (0);
 	i = 0;
 	str1 = (unsigned char *)s1;
 	str2 = (unsigned char *)s2;

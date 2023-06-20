@@ -1,35 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/10 17:28:11 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/13 17:36:55 by ccoste           ###   ########.fr       */
+/*   Created: 2023/06/20 10:09:59 by ccoste            #+#    #+#             */
+/*   Updated: 2023/06/20 12:16:03 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned int	sizesrc;
-	char			*dest;
-	unsigned int	i;
+	char	*str;
+	size_t	i;
 
-	i = 0;
-	sizesrc = ft_strlen(s);
-	dest = malloc((sizesrc + 1) * sizeof(char));
-	if (!dest)
-	{
+	if (ft_strlen(s) < len)
+		len = ft_strlen(s);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str || !s)
 		return (NULL);
-	}
-	while (i < sizesrc)
+	if (start > (unsigned int)ft_strlen(s))
 	{
-		dest[i] = s[i];
-		i++;
+		str[0] = '\0';
+		return (str);
 	}
-	dest[i] = '\0';
-	return (dest);
+	i = 0;
+	while (s[start] && (i < len))
+	{
+		str[i] = s[start];
+		i++;
+		start++;
+	}
+	str[i] = '\0';
+	return (str);
 }
+
+// int main()
+// {
+
+// 	printf("%s", ft_substr("Je suis Chloe", 4, 10));
+// 	return (0);
+// }
