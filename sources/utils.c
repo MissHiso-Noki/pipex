@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:16:42 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/22 11:58:19 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/22 15:32:53 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ void	cmd_not_found(char *path_cmd, char	**cmd)
 
 void	initialize_struct(t_pipe *pipex, char *argv[])
 {
-	pipex->infile = open(argv[1], O_RDONLY);
-	error(pipex->infile);
-	pipex->outfile = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
-	error(pipex->outfile);
 	pipex->cmd1 = get_cmd(argv[2]);
 	pipex->cmd2 = get_cmd(argv[3]);
-
 }

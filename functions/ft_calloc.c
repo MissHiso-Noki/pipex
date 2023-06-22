@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 20:12:12 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/22 17:33:33 by ccoste           ###   ########.fr       */
+/*   Created: 2023/06/22 16:16:31 by ccoste            #+#    #+#             */
+/*   Updated: 2023/06/22 16:48:03 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	msg_error(char *error)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	write(1, error, ft_strlen(error));
-	return (1);
-}
-
-void	msg_perror(char *error)
-{
-	perror(error);
-	exit(EXIT_FAILURE);
-}
-
-void	error(int ret)
-{
-	if (ret == -1)
+	unsigned char	*str;
+	if (!nmemb || !size)
 	{
-		write(2, strerror(errno), ft_strlen(strerror(errno)));
-		write(2, "\n", 1);
-		exit(1);
+		return (0);
 	}
+	if (size != 0 && (size * nmemb) / size == !nmemb)
+	{
+		return (NULL);
+	}
+	str = malloc(nmemb * size);
+	if (!nmemb || !size)
+	{
+		return (str);
+	}
+	if (!str)
+	{
+		return (NULL);
+	}
+	ft_bzero(str, nmemb * size);
+	return (str);
 }

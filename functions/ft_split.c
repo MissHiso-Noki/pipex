@@ -6,103 +6,103 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:14:20 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/20 12:13:46 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/22 17:06:19 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-size_t	check_str(char const *s, char c)
+char	**free_tab(char **tab)
 {
-	size_t	i;
-	size_t	n;
+	int	i;
 
-	i = 1;
-	n = 0;
-	if (!(s[0]))
-		return (0);
-	if (s[0] != c)
-		n++;
-	while (s[i])
-	{
-		if (s[i] != c && s[i - 1] == c)
-			n++;
-		i++;
-	}
-	return (n);
-}
-
-void	ft_free(char **spl, size_t i)
-{
-	while (i > 0)
-	{
-		free(spl[i]);
-		i--;
-	}
-	free(spl[0]);
-	free(spl);
-}
-
-char	*ft_strndup(char const *str, size_t size)
-{
-	char	*dest;
-	size_t	i;
-
-	dest = (char *)malloc(sizeof(*dest) * (size + 1));
-	if (!dest)
-		return (NULL);
 	i = 0;
-	while (str[i] && i < size)
+	if(tab[i])
 	{
-		dest[i] = str[i];
+		while (tab[i])
+		{
+			free(tab[i]);
+			i++;
+		}
+	}
+	free(tab);
+	return (NULL);
+}
+
+size_t	count_words(const char *s, char c)
+{
+	int	i;
+	int	nbr;
+
+	i = 0;
+	nbr = 0;
+	if (!s[0])
+		return (0);
+	while (s[i] && s[i] == c)
+		i++;
+	while (s[i] != '\0')
+	{
+		if (s[i] == c)
+		{
+			nbr++;
+			while (s[i] && s[i] == c)
+				i++;
+			continue ;
+		}
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	if (s[i - 1] != c)
+		nbr++;
+	return (nbr);
 }
 
-char	**ft_create_str(char **spl, char const *s, char c, int i)
+void	get_word(char **next, size_t *len, char c)
 {
-	size_t	start;
-	size_t	end;
+	size_t	i;
 
-	start = 0;
-	while (s[start])
+	*next = *next + *len;
+	*len = 0;
+	i = 0;
+	while (**next && **next == c)
 	{
-		end = 0;
-		while (s[start + end] && s[start + end] != c)
-			end++;
-		if (end > 0)
-		{
-			spl[i] = ft_strndup(s + start, end);
-			if (!spl[i])
-			{
-				ft_free(spl, i);
-				return (NULL);
-			}
-			i++;
-			start = start + end;
-		}
-		if (s[start])
-			start++;
+		(*next)++;
 	}
-	spl[i] = NULL;
-	return (spl);
+	while ((*next)[i] != '\0')
+	{
+		if ((*next)[i] == c)
+		{
+			return ;
+		}
+		(*len)++;
+		i++;
+	}
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(const char *s, char c)
 {
-	char	**spl;
-	size_t	size;
-	int		i;
+	char	**tab;
+	char	*next;
+	size_t	len;
+	size_t	i;
 
+	i = 0;
+	len = 0;
+	next = (char *)s;
 	if (!s)
 		return (NULL);
-	i = 0;
-	size = check_str(s, c);
-	spl = (char **)malloc(sizeof(spl) * (size + 1));
-	if (!spl)
+	tab = ft_calloc((count_words(s, c) + 1), sizeof(char *));
+	if (!tab)
 		return (NULL);
-	spl = ft_create_str(spl, s, c, i);
-	return (spl);
+	while (i < count_words(s, c))
+	{
+		get_word(&next, &len, c);
+		tab[i] = ft_calloc((len + 1), sizeof(char));
+		if (!tab[i])
+		{
+			return (free_tab(tab));
+		}
+		ft_strlcpy(tab[i], next, len +1);
+		i++;
+	}
+	return (tab);
 }

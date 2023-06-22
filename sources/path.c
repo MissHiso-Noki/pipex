@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:58:06 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/20 11:04:43 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/22 18:21:15 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,21 @@ char	**find_paths_and_split(char **envp)
 char	**paths_add_slash(char **paths)
 {
 	int		i;
+	char 	*tmp;
 
 	paths = find_paths_and_split(paths);
+	if (!paths)
+	{
+		return (NULL);
+	}
 	i = -1;
 	while (paths[++i])
-		paths[i] = ft_strjoin(paths[i], "/");
+	{
+		tmp = paths[i];
+		paths[i] = ft_strjoin(tmp, "/");
+		free(tmp);
+	}
+
 	return (paths);
 }
 
@@ -70,8 +80,12 @@ char	*cmd_exist(char	*cmd, char **paths)
 	{
 		cmd_path = ft_strjoin(paths[i], cmd);
 		if (access(cmd_path, 0 | 1) == 0)
+		{
+			free_tab(paths);
 			return (cmd_path);
+		}
 		free(cmd_path);
 	}
+	free_tab(paths);
 	return (NULL);
 }

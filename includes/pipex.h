@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:21:14 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/20 13:22:03 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/22 17:33:40 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ typedef struct s_pipe
 /* FUNCTIONS */
 
 //ft_split.c
-size_t		check_str(char const *s, char c);
-void		ft_free(char **spl, size_t i);
-char		*ft_strndup(char const *str, size_t size);
-char		**ft_create_str(char **spl, char const *s, char c, int i);
-char		**ft_split(char const *s, char c);
+char		**free_tab(char **tab);
+size_t		count_words(const char *s, char c);
+void		get_word(char **next, size_t *len, char c);
+char		**ft_split(const char *s, char c);
 
 //ft_strjoin.c
 char		*ft_strjoin(char const *s1, char const *s2);
@@ -75,6 +74,19 @@ int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 //ft_substr.c
 char		*ft_substr(char const *s, unsigned int start, size_t len);
+
+//ft_calloc.c
+void		*ft_calloc(size_t nmemb, size_t size);
+
+//ft_strlcpy.c
+size_t		ft_strlcpy(char *dst, const char *src, size_t size);
+
+//ft_bzero.c
+void		ft_bzero(void *s, size_t n);
+
+//ft_strlcpy.c
+size_t		ft_strlcpy(char *dst, const char *src, size_t size);
+
 
 /* SOURCES */
 
@@ -94,8 +106,8 @@ void		msg_perror(char *error);
 void		error(int ret);
 
 //child.c
-void		first_child(t_pipe pipex, char *envp[]);
-void		second_child(t_pipe pipex, char *envp[]);
+void		first_child(t_pipe *pipex, char *argv[], char *envp[]);
+void		second_child(t_pipe *pipex, char *argv[], char *envp[]);
 void		parent(t_pipe pipex);
 
 #endif

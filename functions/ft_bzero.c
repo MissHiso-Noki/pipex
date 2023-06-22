@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 20:12:12 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/22 17:33:33 by ccoste           ###   ########.fr       */
+/*   Created: 2023/06/22 16:26:21 by ccoste            #+#    #+#             */
+/*   Updated: 2023/06/22 16:27:47 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	msg_error(char *error)
+void	ft_bzero(void *s, size_t n)
 {
-	write(1, error, ft_strlen(error));
-	return (1);
-}
+	size_t	i;
 
-void	msg_perror(char *error)
-{
-	perror(error);
-	exit(EXIT_FAILURE);
-}
-
-void	error(int ret)
-{
-	if (ret == -1)
+	i = 0;
+	if (!s)
 	{
-		write(2, strerror(errno), ft_strlen(strerror(errno)));
-		write(2, "\n", 1);
-		exit(1);
+		return ;
+	}
+	while (i < n)
+	{
+		*(char *)(s + i) = 0;
+		i++;
 	}
 }

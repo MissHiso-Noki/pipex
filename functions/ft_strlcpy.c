@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 20:12:12 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/22 17:33:33 by ccoste           ###   ########.fr       */
+/*   Created: 2023/06/22 16:24:18 by ccoste            #+#    #+#             */
+/*   Updated: 2023/06/22 16:25:05 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	msg_error(char *error)
-{
-	write(1, error, ft_strlen(error));
-	return (1);
-}
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 
-void	msg_perror(char *error)
 {
-	perror(error);
-	exit(EXIT_FAILURE);
-}
+	unsigned int	i;
+	unsigned int	j;
 
-void	error(int ret)
-{
-	if (ret == -1)
+	i = 0;
+	j = 0;
+	i = ft_strlen(src);
+	if (size != 0)
 	{
-		write(2, strerror(errno), ft_strlen(strerror(errno)));
-		write(2, "\n", 1);
-		exit(1);
+		while (src[j] != '\0' && j < (size - 1))
+		{
+			dst[j] = src[j];
+			j++;
+		}
+		dst[j] = '\0';
 	}
+	return (i);
 }
