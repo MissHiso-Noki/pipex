@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:58:06 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/22 18:21:15 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/23 13:48:43 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ char	**find_paths_and_split(char **envp)
 	return (paths);
 }
 
-char	**paths_add_slash(char **paths)
+char	**paths_add_slash(t_pipe *pipex, char **paths, char *cmd)
 {
 	int		i;
 	char 	*tmp;
 
 	paths = find_paths_and_split(paths);
-	if (!paths)
+	if (!paths || ft_strchr(cmd, '/') != NULL)
 	{
-		return (NULL);
+		find_absolut_path(pipex, paths, cmd);
 	}
 	i = -1;
 	while (paths[++i])
@@ -57,7 +57,7 @@ char	**paths_add_slash(char **paths)
 	return (paths);
 }
 
-char	*cmd_exist(char	*cmd, char **paths)
+char	*cmd_exist(t_pipe *pipex, char	*cmd, char **paths)
 {
 	char	*cmd_path;
 	int		i;
@@ -74,7 +74,7 @@ char	*cmd_exist(char	*cmd, char **paths)
 			return (NULL);
 		}
 	}
-	paths = paths_add_slash(paths);
+	paths = paths_add_slash(pipex, paths, cmd);
 	i = -1;
 	while (paths[++i])
 	{

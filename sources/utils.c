@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:16:42 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/22 15:32:53 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/23 13:49:12 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,23 @@ void	initialize_struct(t_pipe *pipex, char *argv[])
 {
 	pipex->cmd1 = get_cmd(argv[2]);
 	pipex->cmd2 = get_cmd(argv[3]);
+}
+
+char	*find_absolut_path(t_pipe *pipex, char **paths, char *cmd)
+{
+	if (!paths && ft_strchr(cmd, '/') != NULL)
+	{
+		if (access(cmd, F_OK | X_OK) == 0)
+		{
+			return (cmd);
+		}
+	}
+	if (paths && access(cmd, F_OK | X_OK) == 0)
+	{
+		free_tab(paths);
+		return (cmd);
+	}
+	else
+		child_error(pipex, cmd, paths);
+	return (NULL);
 }

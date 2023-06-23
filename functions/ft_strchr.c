@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 19:36:48 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/23 12:41:36 by ccoste           ###   ########.fr       */
+/*   Created: 2023/06/22 18:26:04 by ccoste            #+#    #+#             */
+/*   Updated: 2023/06/22 18:26:21 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	main(int argc, char *argv[], char *envp[])
+char	*ft_strchr(const char *s, int c)
 {
-	t_pipe	pipex;
+	int	i;
 
-	if (argc == 5)
+	i = 0;
+	if (!s)
 	{
-		initialize_struct(&pipex, argv);
-		error(pipe(pipex.pipe));
-		pipex.pid1 = fork();
-		error(pipex.pid1);
-		if (pipex.pid1 == 0)
-			first_child(&pipex, argv, envp);
-		else if (pipex.pid1 > 0)
-		{
-			pipex.pid2 = fork();
-			error(pipex.pid2);
-			if (pipex.pid2 == 0)
-				second_child(&pipex, argv, envp);
-			parent(pipex);
-		}
+		return (NULL);
 	}
-	else
-		msg_error(ERR_INPUT);
-	return (0);
+	while (s[i] != '\0')
+	{
+		if (s[i] == (char)c)
+		{
+			return ((char *)(s + i));
+		}
+		i++;
+	}
+	if (s[i] == (char)c)
+	{
+		return ((char *)(s + i));
+	}
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 13:12:55 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/22 17:56:16 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/23 13:50:37 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	first_child(t_pipe *pipex, char *argv[], char *envp[])
 	error(dup2(pipex->pipe[1], STDOUT_FILENO));
 	error(close(pipex->pipe[0]));
 	error(close(pipex->pipe[1]));
-	pipex->cmd_paths1 = cmd_exist(pipex->cmd1[0], envp);
+	pipex->cmd_paths1 = cmd_exist(pipex, pipex->cmd1[0], envp);
 	if (!pipex->cmd_paths1 || execve(pipex->cmd_paths1, pipex->cmd1, NULL) == -1)
 	{
 		write(2, "command not found\n", 19);
@@ -47,7 +47,7 @@ void	second_child(t_pipe *pipex, char *argv[], char *envp[])
 	error(dup2(pipex->pipe[0], STDIN_FILENO));
 	error(close(pipex->pipe[0]));
 	error(close(pipex->pipe[1]));
-	pipex->cmd_paths2 = cmd_exist(pipex->cmd2[0], envp);
+	pipex->cmd_paths2 = cmd_exist(pipex, pipex->cmd2[0], envp);
 	if (!pipex->cmd_paths2 || execve(pipex->cmd_paths2, pipex->cmd2, NULL) == -1)
 	{
 		write(2, "command not found\n", 19);
@@ -59,8 +59,6 @@ void	second_child(t_pipe *pipex, char *argv[], char *envp[])
 			free_tab(pipex->cmd1);
 		exit(EXIT_FAILURE);
 	}
-	// cmd_not_found(pipex->cmd_paths2, pipex->cmd2);
-	// error(execve(pipex->cmd_paths2, pipex->cmd2, NULL));
 }
 
 void	parent(t_pipe pipex)
