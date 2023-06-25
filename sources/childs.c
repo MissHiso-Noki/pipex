@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 13:12:55 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/25 22:53:43 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/26 00:20:15 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,26 @@ void	first_child(t_pipe *pipex, char *argv[], char *envp[])
 	error(close(pipex->pipe[0]));
 	error(close(pipex->pipe[1]));
 	pipex->cmd_paths1 = cmd_exist(pipex, pipex->cmd1[0], envp);
+	if (ft_strchr(pipex->cmd1[0], '/'))
+	{
+		msg_errr = ft_strjoin(pipex->cmd1[0], ": No such file or directory\n");
+		if (msg_errr)
+		{
+			write(2, msg_errr, ft_strlen(msg_errr));
+			free(msg_errr);
+			if(pipex->cmd_paths1)
+				free(pipex->cmd_paths1);
+			if (pipex->cmd1)
+				free_tab(pipex->cmd1);
+			if (pipex->cmd2)
+				free_tab(pipex->cmd2);
+			exit(EXIT_FAILURE);
+		}
+	}
 	if (!pipex->cmd_paths1 || execve(pipex->cmd_paths1, pipex->cmd1, NULL) == -1)
 	{
-		msg_errr = ft_strjoin(pipex->cmd1[0], ": command not found\n");
+		
+		msg_errr = ft_strjoin(pipex->cmd1[0], ": command not found1\n");
 		if (msg_errr)
 		{
 			write(2, msg_errr, ft_strlen(msg_errr));
@@ -56,7 +73,7 @@ void	second_child(t_pipe *pipex, char *argv[], char *envp[])
 	pipex->cmd_paths2 = cmd_exist(pipex, pipex->cmd2[0], envp);
 	if (!pipex->cmd_paths2 || execve(pipex->cmd_paths2, pipex->cmd2, NULL) == -1)
 	{
-		msg_errr = ft_strjoin(pipex->cmd2[0], ": command not found\n");
+		msg_errr = ft_strjoin(pipex->cmd2[0], ": command not found2\n");
 		if (msg_errr)
 		{
 			write(2, msg_errr, ft_strlen(msg_errr));
