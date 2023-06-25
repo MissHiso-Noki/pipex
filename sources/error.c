@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:12:12 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/23 13:57:30 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/25 20:03:55 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ int	msg_error(char *error)
 {
 	write(1, error, ft_strlen(error));
 	return (1);
-}
-
-void	msg_perror(char *error)
-{
-	perror(error);
-	exit(EXIT_FAILURE);
 }
 
 void	error(int ret)
@@ -44,7 +38,7 @@ void	child_error(t_pipe *pipex, char *cmd, char **paths)
 		write(2, msg_errr, ft_strlen(msg_errr));
 		free(msg_errr);
 	}
-	if(paths)
+	if (paths)
 	{
 		free_tab(paths);
 	}

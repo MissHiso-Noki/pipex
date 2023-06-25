@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:21:14 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/23 13:51:17 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/25 19:42:21 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,11 @@ char		*cmd_exist(t_pipe *pipex, char	*cmd, char **paths);
 
 //utils.c
 char		**get_cmd(char *s);
-void		cmd_not_found(char *path_cmd, char	**cmd);
 void		initialize_struct(t_pipe *pipex, char *argv[]);
 char		*find_absolut_path(t_pipe *pipex, char **paths, char *cmd);
 
 //error.c
 int			msg_error(char *error);
-void		msg_perror(char *error);
 void		error(int ret);
 void		child_error(t_pipe *pipex, char *cmd, char **paths);
 
