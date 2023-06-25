@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:16:42 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/25 19:42:27 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/25 21:22:20 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	**get_cmd(char *s)
 		return (0);
 	return (ft_split(s, ' '));
 }
+
 
 void	initialize_struct(t_pipe *pipex, char *argv[])
 {

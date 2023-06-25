@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:21:14 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/25 19:42:21 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/25 21:22:51 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,6 @@
 # include <string.h>
 
 # define ERR_INPUT "Invalid number of arguments.\n"
-# define ERR_INFILE "Infile.\n"
-# define ERR_OUTFILE "Outfile.\n"
-# define ERR_PIPE "Pipe.\n"
-# define ERR_CMD "Invalid command.\n"
-# define ERR_FORK "Fork.\n"
-# define ERR_PID "Pid.\n"
 
 typedef struct s_pipe
 {
