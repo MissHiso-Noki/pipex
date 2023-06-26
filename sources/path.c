@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 10:58:06 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/25 19:40:07 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/26 14:00:30 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**find_paths_and_split(char **envp)
 char	**paths_add_slash(t_pipe *pipex, char **paths, char *cmd)
 {
 	int		i;
-	char 	*tmp;
+	char	*tmp;
 
 	paths = find_paths_and_split(paths);
 	if (!paths || ft_strchr(cmd, '/') != NULL)
@@ -53,11 +53,17 @@ char	**paths_add_slash(t_pipe *pipex, char **paths, char *cmd)
 		paths[i] = ft_strjoin(tmp, "/");
 		free(tmp);
 	}
-
 	return (paths);
 }
 
-char	*cmd_exist(t_pipe *pipex, char	*cmd, char **paths)
+char	*cmd_exist2(char *cmd)
+{
+	if (access(cmd, 0 | 1) == 0)
+		return (cmd);
+	return (NULL);
+}
+
+char	*cmd_exist(t_pipe *pipex, char *cmd, char **paths)
 {
 	char	*cmd_path;
 	int		i;
@@ -68,11 +74,7 @@ char	*cmd_exist(t_pipe *pipex, char	*cmd, char **paths)
 	while (cmd[++i])
 	{
 		if (cmd[i] == '/')
-		{
-			if (access(cmd, 0 | 1) == 0)
-				return (cmd);
-			return (NULL);
-		}
+			return (cmd_exist2(cmd));
 	}
 	paths = paths_add_slash(pipex, paths, cmd);
 	i = -1;

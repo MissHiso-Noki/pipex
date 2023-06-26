@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:12:12 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/26 00:59:05 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/26 12:07:34 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@ void	error(int ret)
 {
 	if (ret == -1)
 	{
+		write(2, strerror(errno), ft_strlen(strerror(errno)));
+		write(2, "\n", 1);
 		exit(1);
 	}
 }
 
 void	child_error(t_pipe *pipex, char *cmd, char **paths)
 {
-	char *msg_errr;
+	char	*msg_errr;
 
-	msg_errr = ft_strjoin(cmd, ": command not found1\n");
+	msg_errr = ft_strjoin(cmd, ": command not found\n");
 	if (msg_errr)
 	{
 		write(2, msg_errr, ft_strlen(msg_errr));
@@ -46,4 +48,3 @@ void	child_error(t_pipe *pipex, char *cmd, char **paths)
 		free_tab(pipex->cmd2);
 	exit (EXIT_FAILURE);
 }
-	

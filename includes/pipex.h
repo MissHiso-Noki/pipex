@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:21:14 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/26 00:59:10 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/26 14:00:46 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void		ft_putchar_fd(char c, int fd);
 char		**find_paths_and_split(char **envp);
 char		**paths_add_slash(t_pipe *pipex, char **paths, char *cmd);
 char		*cmd_exist(t_pipe *pipex, char	*cmd, char **paths);
+char		*cmd_exist2(char *cmd);
 
 //utils.c
 char		**get_cmd(char *s);

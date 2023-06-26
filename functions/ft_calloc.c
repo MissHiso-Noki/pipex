@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:16:31 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/22 16:48:03 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/26 12:03:12 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	unsigned char	*str;
+
 	if (!nmemb || !size)
 	{
 		return (0);
