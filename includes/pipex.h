@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:21:14 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/26 14:00:46 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/29 10:01:32 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,12 @@ char		*find_absolut_path(t_pipe *pipex, char **paths, char *cmd);
 
 //error.c
 int			msg_error(char *error);
-void		error(int ret);
+void		error(t_pipe *pipex, int ret);
 void		child_error(t_pipe *pipex, char *cmd, char **paths);
 
 //child.c
 void		first_child(t_pipe *pipex, char *argv[], char *envp[]);
 void		second_child(t_pipe *pipex, char *argv[], char *envp[]);
-void		parent(t_pipe pipex);
+void		parent(t_pipe *pipex);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ccoste <ccoste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 20:12:12 by ccoste            #+#    #+#             */
-/*   Updated: 2023/06/26 12:07:34 by ccoste           ###   ########.fr       */
+/*   Updated: 2023/06/29 11:40:47 by ccoste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,20 @@ int	msg_error(char *error)
 	return (1);
 }
 
-void	error(int ret)
+void	error(t_pipe *pipex, int ret)
 {
 	if (ret == -1)
 	{
 		write(2, strerror(errno), ft_strlen(strerror(errno)));
 		write(2, "\n", 1);
+		if (pipex->pipe[0])
+			close(pipex->pipe[0]);
+		if (pipex->pipe[1])
+			close(pipex->pipe[1]);
+		if (pipex->cmd1)
+			free_tab(pipex->cmd1);
+		if (pipex->cmd2)
+			free_tab(pipex->cmd2);
 		exit(1);
 	}
 }
